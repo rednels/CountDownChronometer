@@ -1,0 +1,8 @@
+/build
+build/
+*.apk
+*.ap_
+*.iml
+*.im_
+local.properties
+.idea/
