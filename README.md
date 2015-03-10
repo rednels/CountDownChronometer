@@ -8,7 +8,7 @@ How To
 2. Add the widget in your `xml`
 
  ```xml
-		<com.vcokey.widget.CountDownChronometer
+<com.vcokey.widget.CountDownChronometer
      android:padding="16dp"
      android:id="@+id/countdownchronometer"
      android:layout_width="wrap_content"
