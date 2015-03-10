@@ -16,9 +16,9 @@ How To
 ``` 
 3. In your `Activity`, you can set the format of display String, use 
 
-`CountDownChronometer.setFormat(" %s ", CountDownChronometer.FLAG_TIME_FORMAT_CUSTOM)` 
+   `CountDownChronometer.setFormat(" %s ", CountDownChronometer.FLAG_TIME_FORMAT_CUSTOM)` 
 
-to set format like `Chronometer`;
+   to set format like `Chronometer`;
  
 4. Use `CountDownChronometer.setTime(int)` to init the view with the int value which means the seconds you want to count down; 
 5. You can add a listener to observer the count down event, just use `setOnChronometerTickListener`
