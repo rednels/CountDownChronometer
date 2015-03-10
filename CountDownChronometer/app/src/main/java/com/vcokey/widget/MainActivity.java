@@ -54,8 +54,10 @@ public class MainActivity extends ActionBarActivity {
         set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (edit.getText().length() == 0)
+                if (edit.getText().length() == 0) {
+                    Toast.makeText(MainActivity.this,"先输入倒计时时间再设置",Toast.LENGTH_SHORT).show();
                     return;
+                }
                 chronometer2.setTime(Integer.parseInt(edit.getText().toString().trim()));
             }
         });
