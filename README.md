@@ -1,5 +1,6 @@
 # CountDownChronometer
 It's a `Count Down Chronometer` widget of android base on Chronometer.  （Android倒计时控件）
+Try the view by [demo](https://github.com/rednels/CountDownChronometer/tree/master/demo)
 
 How To
 --------------
