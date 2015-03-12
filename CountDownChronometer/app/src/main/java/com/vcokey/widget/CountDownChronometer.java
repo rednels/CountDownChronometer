@@ -120,8 +120,7 @@ public class CountDownChronometer extends TextView {
      */
     public void setTime(int seconds,long base){
         this.time = seconds;
-        mBase = base;
-        updateText(mBase);
+        setBase(base);
     }
 
     /**
