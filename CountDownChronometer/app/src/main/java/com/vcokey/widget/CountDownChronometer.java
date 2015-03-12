@@ -102,12 +102,32 @@ public class CountDownChronometer extends TextView {
 
     private int time = 0;
 
+    /**
+     * set the time of chronometer to count down
+     * @param time number of seconds
+     */
     public void setTime(int time) {
         this.time = time;
         mBase = SystemClock.elapsedRealtime();
         updateText(mBase);
     }
 
+    /**
+     * set the time of chronometer to count down from {@code base}
+     *
+     * @param seconds number of seconds
+     * @param base the time  milliseconds of the chronometer started
+     */
+    public void setTime(int seconds,long base){
+        this.time = seconds;
+        mBase = base;
+        updateText(mBase);
+    }
+
+    /**
+     * get the total time of chronometer to count down
+     * @return time of seconds
+     */
     public int getTime() {
         return time;
     }
@@ -225,8 +245,7 @@ public class CountDownChronometer extends TextView {
     }
 
     /**
-     * Start counting up.  This does not affect the base as set from {@link #setBase}, just
-     * the view display.
+     * Start counting up.
      * <p/>
      * Chronometer works by regularly scheduling messages to the handler, even when the
      * Widget is not visible.  To make sure resource leaks do not occur, the user should

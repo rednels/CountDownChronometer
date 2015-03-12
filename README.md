@@ -1,4 +1,4 @@
-# CountDownChronometer
+﻿# CountDownChronometer
 It's a `Count Down Chronometer` widget of android base on Chronometer.  （Android倒计时控件）
 Try the view by [demo](https://github.com/rednels/CountDownChronometer/tree/master/demo)
 
@@ -20,9 +20,17 @@ How To
    `CountDownChronometer.setFormat(" %s ", CountDownChronometer.FLAG_TIME_FORMAT_CUSTOM)` 
 
    to set format like `Chronometer`;
+
+   > you have two choices of format, try use `CountDownChronometer.FLAG_TIME_FORMAT_DEFAULT` to see a default format.
  
 4. Use `CountDownChronometer.setTime(int)` to init the view with the int value which means the seconds you want to count down; 
 5. You can add a listener to observer the count down event, just use `setOnChronometerTickListener`
+
+TIPS
+--------------
+
+1. `setTime(seconds,baseTime)`can count down the time from baseTime you give.
+
 
 LISENCE
 --------------
