@@ -23,7 +23,7 @@ import java.util.Locale;
 /**
  * Class that implements a simple timer.
  * <p/>
- * You can give it a start time in the {@link SystemClock#elapsedRealtime} timebase,
+ * You can give it a start time in the {@link android.os.SystemClock#elapsedRealtime} timebase,
  * and it counts up from that, or if you don't give it a base time, it will use the
  * time at which you call {@link #start}.  By default it will display the current
  * timer value in the form "MM:SS" or "H:MM:SS", or you can use {@link #setFormat}
@@ -104,6 +104,7 @@ public class CountDownChronometer extends TextView {
 
     /**
      * set the time of chronometer to count down
+     *
      * @param time number of seconds
      */
     public void setTime(int time) {
@@ -115,16 +116,19 @@ public class CountDownChronometer extends TextView {
     /**
      * set the time of chronometer to count down from {@code base}
      *
-     * @param seconds number of seconds
-     * @param base the time  milliseconds of the chronometer started
+     * @param seconds   number of seconds
+     * @param startTime the time  milliseconds of the chronometer started
      */
-    public void setTime(int seconds,long base){
-        this.time = seconds;
-        setBase(base);
+    public void setTime(int seconds, long startTime, long currentTime) {
+        time = seconds;
+        mBase = startTime;
+        dispatchChronometerTick();
+        updateText(currentTime);
     }
 
     /**
      * get the total time of chronometer to count down
+     *
      * @return time of seconds
      */
     public int getTime() {
@@ -134,7 +138,7 @@ public class CountDownChronometer extends TextView {
     /**
      * Set the time that the count-up timer is in reference to.
      *
-     * @param base Use the {@link SystemClock#elapsedRealtime} time base.
+     * @param base Use the {@link android.os.SystemClock#elapsedRealtime} time base.
      */
     private void setBase(long base) {
         mBase = base;
@@ -181,7 +185,7 @@ public class CountDownChronometer extends TextView {
         mFormat = format;
         timeFormatFlag = flag;
 
-        switch (timeFormatFlag){
+        switch (timeFormatFlag) {
             case FLAG_TIME_FORMAT_CUSTOM:
                 break;
             default:
@@ -189,11 +193,11 @@ public class CountDownChronometer extends TextView {
         }
     }
 
-    private String formatText(long seconds){
-        String text ="";
-        switch (timeFormatFlag){
+    private String formatText(long seconds) {
+        String text = "";
+        switch (timeFormatFlag) {
             case FLAG_TIME_FORMAT_CUSTOM:
-                text = new Formatter(mFormatBuilder,Locale.getDefault()).format(mFormat,seconds).toString();
+                text = new Formatter(mFormatBuilder, Locale.getDefault()).format(mFormat, seconds).toString();
                 break;
             default:
                 text = DateUtils.formatElapsedTime(mRecycle, seconds);
@@ -253,7 +257,7 @@ public class CountDownChronometer extends TextView {
     public void start() {
         mStarted = true;
         updateRunning();
-        setBase(SystemClock.elapsedRealtime());
+//        setBase(SystemClock.elapsedRealtime());
     }
 
     /**
@@ -272,7 +276,7 @@ public class CountDownChronometer extends TextView {
         long seconds = (SystemClock.elapsedRealtime() - mBase);
         seconds /= 1000;
         seconds = time - seconds;
-        if (seconds <= 0 ){
+        if (seconds < 0) {
             return;
         }
         mStarted = true;
@@ -304,12 +308,12 @@ public class CountDownChronometer extends TextView {
     }
 
     private synchronized void updateText(long now) {
+
         long seconds = (now - mBase);
         seconds /= 1000;
         seconds = time - seconds;
-        if (seconds <= 0) {
-            stop();
-            dispatchChronometerFinish();
+        if (seconds < 0) {
+            return;
         }
         setText(formatText(seconds));
     }
@@ -318,7 +322,7 @@ public class CountDownChronometer extends TextView {
         boolean running = mVisible && mStarted;
         if (running != mRunning) {
             if (running) {
-                updateText(SystemClock.elapsedRealtime());
+                updateText(System.currentTimeMillis());
                 dispatchChronometerTick();
                 mHandler.sendMessageDelayed(Message.obtain(mHandler, TICK_WHAT), 1000);
             } else {
@@ -331,7 +335,7 @@ public class CountDownChronometer extends TextView {
     private Handler mHandler = new Handler() {
         public void handleMessage(Message m) {
             if (mRunning) {
-                updateText(SystemClock.elapsedRealtime());
+                updateText(System.currentTimeMillis());
                 dispatchChronometerTick();
                 sendMessageDelayed(Message.obtain(this, TICK_WHAT), 1000);
             }
