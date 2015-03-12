@@ -29,7 +29,7 @@ How To
 TIPS
 --------------
 
-1. `setTime(seconds,baseTime)`can count down the time from baseTime you give.
+1. `setTime(seconds,baseTime,currentTime)`can count down the time from baseTime you give.
 
 
 LISENCE
