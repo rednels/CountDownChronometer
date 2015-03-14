@@ -58,7 +58,7 @@ public class MainActivity extends ActionBarActivity {
                     Toast.makeText(MainActivity.this,"先输入倒计时时间再设置",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                chronometer2.setTime(Integer.parseInt(edit.getText().toString().trim()));
+                chronometer2.setTime(Integer.parseInt(edit.getText().toString().trim()),System.currentTimeMillis() - 50 *1000L,System.currentTimeMillis());
             }
         });
         start.setOnClickListener(new View.OnClickListener() {

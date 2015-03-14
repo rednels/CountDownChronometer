@@ -277,6 +277,7 @@ public class CountDownChronometer extends TextView {
         seconds /= 1000;
         seconds = time - seconds;
         if (seconds < 0) {
+            setText(formatText(0));
             return;
         }
         mStarted = true;
@@ -313,6 +314,7 @@ public class CountDownChronometer extends TextView {
         seconds /= 1000;
         seconds = time - seconds;
         if (seconds < 0) {
+            setText(formatText(0));
             return;
         }
         setText(formatText(seconds));
